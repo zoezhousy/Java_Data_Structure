@@ -1,0 +1,51 @@
+import java.util.Queue;
+import java.util.LinkedList;
+
+public class TreeNode {
+    public static class TNode {
+        public int val;
+        public TNode left;
+        public TNode right;
+
+        public TNode(int val){
+            this.val = val;
+            this.left = null;
+            this.right = null;
+        }
+
+        public TNode(TNode left, int val, TNode right){
+            this.left = left;
+            this.val = val;
+            this.right = right;
+        }
+    }
+
+    public static void levelOrder(TNode root){
+        if (root == null) return;
+        Queue<TNode> queue = new LinkedList<>();
+        queue.add(root);
+        while (!queue.isEmpty()) {
+            TNode current = queue.poll();
+            System.out.print(current.val + " ");
+            if (current.left != null) queue.add(current.left);
+            if (current.right != null) queue.add(current.right);
+        }
+        System.out.println(" ");
+    }
+
+    public static void main(String[] args) {
+        /*
+         *      1
+         *   2     3
+         * 4  5   6  7
+         */
+
+        TNode root = new TNode(
+            new TNode(new TNode(4), 2, new TNode(5)),
+            1,
+            new TNode(new TNode(6), 3, new TNode(7))
+        );
+
+        levelOrder(root);
+    }
+}
